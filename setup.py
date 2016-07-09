@@ -11,19 +11,13 @@ from setuptools import setup, find_packages
 
 
 ROOT = os.path.dirname(__file__)
-VERSION_RE = re.compile(r'''__version__ = ['"]([0-9.]+)['"]''')
+VERSION_RE = re.compile(r'''__version__ = ['"]([-a-z0-9.]+)['"]''')
 
 
 requires = [
     'botocore>=1.3.0,<1.4.0',
     'jmespath>=0.7.1,<1.0.0',
 ]
-
-
-if sys.version_info[0] == 2:
-    # concurrent.futures is only in python3, so for
-    # python2 we need to install the backport.
-    requires.append('futures==2.2.0')
 
 
 def get_version():
@@ -47,9 +41,6 @@ setup(
     },
     include_package_data=True,
     install_requires=requires,
-    extras_require={
-        ':python_version=="2.6" or python_version=="2.7"': ['futures==2.2.0']
-    },
     license="Apache License 2.0",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
